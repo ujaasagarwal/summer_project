@@ -1,0 +1,42 @@
+.hero {
+    width: 100vw;
+    height: 100vh;
+    background: url("../assets/Bg1.png") center/cover no-repeat;
+    display: flex;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.chess,
+.chess1 {
+    object-fit: cover;
+    margin-left: 8vw;
+    margin-top: 10vh;
+    height: 80vh;
+    width: 80vw;
+    display: block;
+}
+
+.foot {
+    visibility: visible;
+    position: fixed;
+    height: 90vh;
+    width: auto;
+    transform: rotateZ(-30deg);
+    bottom: 40%;
+    right: 35%;
+
+
+
+}
+
+.chess1 {
+    display: none;
+    opacity: 1;
+}
+
