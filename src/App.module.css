@@ -1,0 +1,10 @@
+.loaded {
+    z-index: 1000;
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
