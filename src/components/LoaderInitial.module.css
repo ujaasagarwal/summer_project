@@ -40,3 +40,51 @@
     opacity: 1;
 }
 
+/* Laptop */
+@media (min-width: 1920px) {
+    .foot {
+        visibility: visible;
+        position: fixed;
+        height: 90vh;
+        width: auto;
+        transform: rotateZ(-30deg);
+        bottom: 40%;
+        right: 40%;
+    }
+}
+
+@media (min-width: 2200px) {
+    .foot {
+        visibility: visible;
+        position: fixed;
+        height: 90vh;
+        width: auto;
+        transform: rotateZ(-30deg);
+        bottom: 40%;
+        right: 45%;
+    }
+}
+
+@media (min-width: 2400px) {
+    .foot {
+        visibility: visible;
+        position: fixed;
+        height: 90vh;
+        width: auto;
+        transform: rotateZ(-30deg);
+        bottom: 40%;
+        right: 50%;
+    }
+}
+
+@media (min-width: 2600px) {
+    .foot {
+        visibility: visible;
+        position: fixed;
+        height: 90vh;
+        width: auto;
+        transform: rotateZ(-30deg);
+        bottom: 40%;
+        right: 55%;
+    }
+}

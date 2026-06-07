@@ -1,20 +1,45 @@
-import { useRef } from "react";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
+
+import { useState, useRef, useEffect } from "react";
 import classes from "./LoaderInitial.module.css";
+
 import chess from "../assets/chess.png";
 import foot from "../assets/foot.png";
 import chess_cut from "../assets/chess_cut.png";
-gsap.registerPlugin(useGSAP);
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+
+export default function LoaderInitial(props) {
+    const [imagesReady, setImagesReady] = useState(false);
+    const chessRef = useRef(null);
+    const footRef = useRef(null);
+    const chessRef1 = useRef(null);
+    const heroRef = useRef(null);
+
+    useEffect(() => {
+        const imgs = [chessRef, chessRef1, footRef];
+
+        Promise.all(
+            imgs.map(
+                (ref) => new Promise((resolve) => {
+                    if (ref.current.complete) resolve();
+                    else ref.current.onload = resolve;
+                })
+            )
+        ).then(() => setImagesReady(true));
+    }, []);
 
 
-const LoaderInitial = (props) => {
-    const heroRef = useRef();
-    const chessRef = useRef();
-    const footRef = useRef();
-    const chessRef1 = useRef();
 
     useGSAP(() => {
+        if (!imagesReady) return;
+        const chessRect = chessRef.current.getBoundingClientRect();
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const chess_width = chessRect.width;
+        const chess_height = chessRect.height;
+        console.log(chessRect);
+        const move_x = width / 2 - chess_width / 2;
+        const move_y = height / 2 - chess_height / 2;
         const tl = gsap.timeline({
             onComplete: () => {
                 props.onLoaded();
@@ -38,8 +63,8 @@ const LoaderInitial = (props) => {
             .to(heroRef.current, { duration: 0.1 })
 
             .set(footRef.current, {
-                y: "-10%",
-                x: "-8%",
+                y: move_y * 3.5,
+                x: move_x * 3,
                 rotation: -7,
                 scale: 1,
             })
@@ -54,8 +79,8 @@ const LoaderInitial = (props) => {
             }, "<")
 
             .set(footRef.current, {
-                bottom: "-13vh",
-                right: "-8vw",
+                x: move_x * 3,
+                y: move_y * 4.5,
                 rotation: 15,
                 scale: 1.1,
             })
@@ -69,37 +94,32 @@ const LoaderInitial = (props) => {
                 ease: "none",
             }, "<")
             .set(footRef.current, {
-                bottom: "-5vh",
-                right: "-8vw",
-                rotation: 25,
+                x: move_x * 3.5,
+                y: move_y * 4,
+                rotation: 40,
                 scale: 1,
             })
 
-            .to(heroRef.current, { duration: 0.03 })
-            .set(footRef.current, {
-                bottom: "0vh",
-                right: "-8vw",
-                rotation: 50,
-            })
+
             .to(chessRef.current, { display: "none", duration: 0.01 })
             .set(chessRef1.current, { display: "block", })
-            .to(chessRef.current, { display: "none", duration: 0.01 })
+            .to(chessRef.current, { display: "none", duration: 0.05 })
             .set(chessRef1.current, { display: "none", })
             .set(footRef.current, {
                 duration: 0.4,
-                x: "30vw",
-                y: "-20vh",
-                rotation: 40,
+                x: move_x * 5,
+                y: move_y * 3,
+                rotation: 50,
                 scale: 0.9,
                 ease: "none",
             })
 
             .to(chessRef.current, { display: "none", duration: 0.2 })
 
-            // FOOT FLIES AWAY
+
             .set(footRef.current, {
-                x: "25vw",
-                y: "-20vh",
+                x: move_x * 6,
+                y: move_y * 2,
                 rotation: 50,
                 scale: 0.9,
                 ease: "none",
@@ -107,20 +127,27 @@ const LoaderInitial = (props) => {
             .to(chessRef.current, { display: "none", duration: 0.01 })
 
             .set(footRef.current, {
-                x: "40vw",
-                y: "-25vh",
+                x: move_x * 7,
+                y: move_y * 2,
                 ease: "none",
 
             })
             .to(chessRef.current, { display: "none", duration: 0.05 })
             .set(footRef.current, {
-                x: "50vw",
+                x: move_x * 8.8,
+                y: move_y * 2,
                 ease: "none",
-            }).to(chessRef.current, { display: "none", duration: 0.05 })
-            .set(footRef.current, {
-                x: "100vw",
-                ease: "none",
+
             })
+            .to(chessRef.current, { display: "none", duration: 0.05 })
+            .set(footRef.current, {
+                x: move_x * 9,
+                y: move_y * 2,
+                ease: "none",
+
+            })
+            .to(chessRef.current, { display: "none", duration: 0.05 })
+
 
         gsap.to(heroRef.current, {
             scale: 1.05,
@@ -128,9 +155,7 @@ const LoaderInitial = (props) => {
             delay: 1,
         });
 
-    }, []);
-
-
+    }, [imagesReady]);
     return (
         <div ref={heroRef} className={classes.hero}>
             <img ref={chessRef} className={classes.chess} src={chess} alt="Chess" />
@@ -138,6 +163,4 @@ const LoaderInitial = (props) => {
             <img ref={footRef} className={classes.foot} src={foot} alt="Foot" />
         </div>
     );
-};
-
-export default LoaderInitial;
+}
