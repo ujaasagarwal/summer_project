@@ -9,6 +9,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 
 export default function LoaderInitial(props) {
+
     const [imagesReady, setImagesReady] = useState(false);
     const chessRef = useRef(null);
     const footRef = useRef(null);
@@ -33,12 +34,31 @@ export default function LoaderInitial(props) {
     useGSAP(() => {
         if (!imagesReady) return;
         const chessRect = chessRef.current.getBoundingClientRect();
+        const footRect = footRef.current.getBoundingClientRect();
         const width = window.innerWidth;
         const height = window.innerHeight;
         const chess_width = chessRect.width;
         const chess_height = chessRect.height;
+        let foot_scale = footRef.current.style.scale;
+        foot_scale = 1;
         console.log(chessRect);
-        const move_x = width / 2 - chess_width / 2;
+        let move_x;
+        if (window.innerWidth > 2700) {
+            move_x = (width / 2 - chess_width / 2) * 1.2;
+            foot_scale = 1.3;
+        }
+        else if (window.innerWidth > 2500) {
+            move_x = (width / 2 - chess_width / 2) * 1.1;
+            foot_scale = 1.2;
+        }
+        else if (window.innerWidth > 2200) {
+            move_x = (width / 2 - chess_width / 2) * 0.9;
+            foot_scale = 1.1;
+        } else if (window.innerWidth > 2000) {
+            move_x = (width / 2 - chess_width / 2) * 0.95;
+        } else {
+            move_x = width / 2 - chess_width / 2;
+        }
         const move_y = height / 2 - chess_height / 2;
         const tl = gsap.timeline({
             onComplete: () => {
@@ -66,7 +86,7 @@ export default function LoaderInitial(props) {
                 y: move_y * 3.5,
                 x: move_x * 3,
                 rotation: -7,
-                scale: 1,
+                scale: foot_scale,
             })
 
             .to(heroRef.current, {
@@ -82,7 +102,7 @@ export default function LoaderInitial(props) {
                 x: move_x * 3,
                 y: move_y * 4.5,
                 rotation: 15,
-                scale: 1.1,
+                scale: foot_scale * 1.1,
             })
 
             .to(heroRef.current, {
@@ -97,7 +117,7 @@ export default function LoaderInitial(props) {
                 x: move_x * 3.5,
                 y: move_y * 4,
                 rotation: 40,
-                scale: 1,
+                scale: foot_scale,
             })
 
 
@@ -110,7 +130,7 @@ export default function LoaderInitial(props) {
                 x: move_x * 5,
                 y: move_y * 3,
                 rotation: 50,
-                scale: 0.9,
+                scale: 0.9 * foot_scale,
                 ease: "none",
             })
 
@@ -121,7 +141,7 @@ export default function LoaderInitial(props) {
                 x: move_x * 6,
                 y: move_y * 2,
                 rotation: 50,
-                scale: 0.9,
+                scale: 0.9 * foot_scale,
                 ease: "none",
             })
             .to(chessRef.current, { display: "none", duration: 0.01 })
