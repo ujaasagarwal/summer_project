@@ -28,7 +28,7 @@ export default function LoaderInitial(props) {
             )
         ).then(() => setImagesReady(true));
     }, []);
-
+    console.log(window.innerWidth, window.innerHeight);
 
 
     useGSAP(() => {
