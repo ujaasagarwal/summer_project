@@ -43,21 +43,39 @@ export default function LoaderInitial(props) {
         foot_scale = 1;
         console.log(chessRect);
         let move_x;
-        if (window.innerWidth > 2700) {
-            move_x = (width / 2 - chess_width / 2) * 1.2;
+
+        if (window.innerWidth > 3000) {
+            move_x = window.innerHeight > 1500 ? (width / 2 - chess_width / 2) * 1.7 : (width / 2 - chess_width / 2) * 1.2;
             foot_scale = 1.3;
         }
-        else if (window.innerWidth > 2500) {
-            move_x = (width / 2 - chess_width / 2) * 1.1;
+        else if (window.innerWidth > 2700) {
+            move_x = window.innerHeight > 1100 ? (width / 2 - chess_width / 2) * 1.5 : (width / 2 - chess_width / 2) * 1.2;
+            foot_scale = 1.3;
+        } else if (window.innerWidth > 2500) {
+            move_x = window.innerHeight > 1100 ? (width / 2 - chess_width / 2) * 1.5 : (width / 2 - chess_width / 2) * 1.1;
             foot_scale = 1.2;
-        }
-        else if (window.innerWidth > 2200) {
-            move_x = (width / 2 - chess_width / 2) * 0.9;
+        } else if (window.innerWidth > 2200) {
+            move_x = window.innerHeight > 1100 ? (width / 2 - chess_width / 2) * 1.5 : (width / 2 - chess_width / 2) * 0.9;
             foot_scale = 1.1;
         } else if (window.innerWidth > 2000) {
-            move_x = (width / 2 - chess_width / 2) * 0.95;
+            move_x = window.innerHeight > 1100 ? (width / 2 - chess_width / 2) * 1.5 : (width / 2 - chess_width / 2) * 0.95;
+        }
+
+        else if (window.innerWidth > 1400) {
+            move_x = (width / 2 - chess_width / 2) * 0.9;
+            foot_scale = 0.95;
+        } else if (window.innerWidth > 1024) {
+            move_x = (width / 2 - chess_width / 2) * 0.85;
+            foot_scale = 0.9;
+        } else if (window.innerWidth > 768) {
+            move_x = (width / 2 - chess_width / 2) * 0.75;
+            foot_scale = 0.8;
+        } else if (window.innerWidth > 480) {
+            move_x = (width / 2 - chess_width / 2) * 0.65;
+            foot_scale = 0.7;
         } else {
-            move_x = width / 2 - chess_width / 2;
+            move_x = (width / 2 - chess_width / 2) * 0.55;
+            foot_scale = 0.6;
         }
         const move_y = height / 2 - chess_height / 2;
         const tl = gsap.timeline({
@@ -161,7 +179,7 @@ export default function LoaderInitial(props) {
             })
             .to(chessRef.current, { display: "none", duration: 0.05 })
             .set(footRef.current, {
-                x: move_x * 9,
+                x: move_x * 20,
                 y: move_y * 2,
                 ease: "none",
 
