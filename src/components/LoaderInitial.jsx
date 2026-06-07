@@ -61,8 +61,11 @@ export default function LoaderInitial(props) {
             move_x = (window.innerHeight > 1100 ? (width / 2 - chess_width / 2) * 1.5 : (width / 2 - chess_width / 2) * 0.97) * (window.innerHeight < 950 ? 0.95 : 1.1);
         }
 
-        else if (window.innerWidth > 1400) {
-            move_x = (width / 2 - chess_width / 2) * 0.9 * (window.innerHeight < 950 ? 1.2 : 1.5);
+        else if (window.innerWidth > 1500) {
+            move_x = (width / 2 - chess_width / 2) * 0.9 * (window.innerHeight < 950 ? 0.8 : 1.3);
+            foot_scale = 1.1;
+        } else if (window.innerWidth > 1400) {
+            move_x = (width / 2 - chess_width / 2) * 0.9 * (window.innerHeight < 950 ? 1.2 : 1.3);
             foot_scale = 1.1;
         } else if (window.innerWidth > 1024) {
             move_x = (width / 2 - chess_width / 2) * 0.85;
