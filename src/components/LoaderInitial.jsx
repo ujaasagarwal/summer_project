@@ -57,21 +57,21 @@ export default function LoaderInitial(props) {
         } else if (window.innerWidth > 2200) {
             move_x = window.innerHeight > 1100 ? (width / 2 - chess_width / 2) * 1.5 : (width / 2 - chess_width / 2) * 0.9;
             foot_scale = 1.1;
-        } else if (window.innerWidth > 2000) {
-            move_x = window.innerHeight > 1100 ? (width / 2 - chess_width / 2) * 1.5 : (width / 2 - chess_width / 2) * 0.95;
+        } else if (window.innerWidth > 1900) {
+            move_x = window.innerHeight > 1100 ? (width / 2 - chess_width / 2) * 1.5 : (width / 2 - chess_width / 2) * 0.97;
         }
 
         else if (window.innerWidth > 1400) {
-            move_x = (width / 2 - chess_width / 2) * 0.9;
+            move_x = (width / 2 - chess_width / 2) * 0.75;
             foot_scale = 0.95;
         } else if (window.innerWidth > 1024) {
-            move_x = (width / 2 - chess_width / 2) * 0.85;
+            move_x = (width / 2 - chess_width / 2) * 0.7;
             foot_scale = 0.9;
         } else if (window.innerWidth > 768) {
-            move_x = (width / 2 - chess_width / 2) * 0.75;
+            move_x = (width / 2 - chess_width / 2) * 0.65;
             foot_scale = 0.8;
         } else if (window.innerWidth > 480) {
-            move_x = (width / 2 - chess_width / 2) * 0.65;
+            move_x = (width / 2 - chess_width / 2) * 0.60;
             foot_scale = 0.7;
         } else {
             move_x = (width / 2 - chess_width / 2) * 0.55;
