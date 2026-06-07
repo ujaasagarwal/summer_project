@@ -79,7 +79,7 @@
 
 @media (min-width: 2600px) {
     .foot {
-        visibility: visible;
+        visibility: hidden;
         position: fixed;
         height: 90vh;
         width: auto;
